@@ -1,0 +1,46 @@
+// Import Custom SB Admin 2 Variables (Overrides Default Bootstrap Variables)
+@import "variables.scss";
+
+// Import Bootstrap
+@import "~bootstrap/scss/bootstrap.scss";
+
+// Import Custom SB Admin 2 Mixins and Components
+@import "mixins.scss";
+@import "global.scss";
+@import "utilities.scss";
+
+// Custom Components
+@import "dropdowns.scss";
+@import "navs.scss";
+@import "buttons.scss";
+@import "cards.scss";
+@import "charts.scss";
+@import "login.scss";
+@import "error.scss";
+@import "footer.scss";
+
+@font-face {
+    font-family: "Vazir";
+    src: url("../../fonts/Vazir.eot");
+    /* IE9 Compat Modes */
+    src: url("../../fonts/Vazir.eot?#iefix") format("embedded-opentype"),
+    url("../../fonts/Vazir.woff2") format("woff2"),
+    url("../../fonts/Vazir.woff") format("woff"),
+    url("../../fonts/Vazir.ttf") format("truetype");
+    /* Safari, Android, iOS */
+}
+
+body {
+    direction: rtl;
+    text-align: right !important;
+    font-family: "Vazir" !important;
+    //   line-height: 1.6;
+}
+
+#registerCheckBox::before{
+    right: -1.5rem;
+}
+
+#registerCheckBox::after{
+    right: -1.5rem;
+}
