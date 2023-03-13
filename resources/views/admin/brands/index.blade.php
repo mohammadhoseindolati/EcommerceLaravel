@@ -37,7 +37,7 @@
                                             {{ $brand->is_active }}
                                         </span>
                                     </td>
-                                    <td>#</td>
+                                    <td><a class="btn btn-sm btn-success" href="{{ route('admin.brands.show' , ['brand' => $brand->id ]) }}">نمایش</a></td>
                                 </tr>
                             @endforeach
                          </tbody>

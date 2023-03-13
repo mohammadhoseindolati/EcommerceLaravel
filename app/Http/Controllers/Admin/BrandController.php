@@ -54,9 +54,9 @@ class BrandController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Brand $brand)
     {
-        //
+        return view('admin.brands.show' , ['brand' => $brand]) ;
     }
 
     /**
