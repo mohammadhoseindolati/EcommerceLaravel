@@ -16,7 +16,7 @@ class BrandController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.brands.index');
     }
 
     /**
@@ -41,6 +41,8 @@ class BrandController extends Controller
             'name' => $request->name ,
             'is_active' => $request->is_active
         ]);
+
+        alert()->info('Title','Lorem Lorem Lorem');
 
         return redirect()->route('admin.brands.index');
     }
