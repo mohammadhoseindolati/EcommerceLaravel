@@ -1,7 +1,7 @@
 @extends('admin.layouts.admin')
 
 @section('title')
-    Edit Brand
+    Edit Attribute
 @endsection
 
 @section('content')
@@ -11,27 +11,20 @@
 
         <div class="col-xl-12 col-md-12 mb-4 p-md-5 bg-white">
            <div class="mb-4">
-               <h5 class="font-weight-bold">ویرایش برند </h5>
+               <h5 class="font-weight-bold">ویرایش ویژگی </h5>
            </div>
             <hr>
                 @include('admin.sections.errors')
-                <form action="{{ route('admin.brands.update' , ['brand' => $brand->id]) }}" method="post">
+                <form action="{{ route('admin.attributes.update' , ['attribute' => $attribute->id]) }}" method="post">
                     @csrf
                     @method('put')
                     <div class="form-row">
 
                     <div class="form-group col-md-3">
                         <label for="name">نام</label>
-                        <input type="text" class="form-control" name="name" id="name" value="{{ $brand->name }}">
+                        <input type="text" class="form-control" name="name" id="name" value="{{ $attribute->name }}">
                     </div>
 
-                    <div class="form-group col-md-3">
-                        <label for="is_active">وضعیت</label>
-                        <select class="form-control" name="is_active" id="is_active">
-                            <option value="1" {{ $brand->getRawOriginal('is_active') ? 'selected' : '' }}>فعال</option>
-                            <option value="0" {{ $brand->getRawOriginal('is_active') ? '' : 'selected' }}>غیر فعال</option>
-                        </select>
-                    </div>
                     </div>
 
                     <button class="btn btn-outline-primary mt-5" type="submit">ثبت </button>

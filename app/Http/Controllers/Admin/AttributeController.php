@@ -6,7 +6,7 @@ use App\Models\Attribute;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateAttributeRequest;
-
+use App\Http\Requests\UpdateAttributeRequest;
 
 class AttributeController extends Controller
 {
@@ -18,7 +18,7 @@ class AttributeController extends Controller
     public function index()
     {
         $attributes = Attribute::latest()->paginate(20);
-        return view('admin.attributes.index' , ['attributes' => $attributes ]);
+        return view('admin.attributes.index', ['attributes' => $attributes]);
     }
 
     /**
@@ -28,7 +28,7 @@ class AttributeController extends Controller
      */
     public function create()
     {
-        return view('admin.attributes.create') ;
+        return view('admin.attributes.create');
     }
 
     /**
@@ -40,12 +40,12 @@ class AttributeController extends Controller
     public function store(CreateAttributeRequest $request)
     {
         Attribute::create([
-            'name' => $request->name ,
+            'name' => $request->name,
         ]);
 
-        alert()->success('بنازُم','برند با موفقیت ایجاد شد .');
+        alert()->success('بنازُم', 'برند با موفقیت ایجاد شد .');
 
-        return redirect()->route('admin.attributes.index') ;
+        return redirect()->route('admin.attributes.index');
     }
 
     /**
@@ -57,7 +57,7 @@ class AttributeController extends Controller
     public function show(Attribute $attribute)
     {
 
-        return view('admin.attributes.show' , [ 'attribute' => $attribute ]) ;
+        return view('admin.attributes.show', ['attribute' => $attribute]);
     }
 
     /**
@@ -66,9 +66,9 @@ class AttributeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Attribute $attribute)
     {
-        //
+        return view('admin.attributes.edit', ['attribute' => $attribute]);
     }
 
     /**
@@ -78,9 +78,15 @@ class AttributeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateAttributeRequest $request, Attribute $attribute)
     {
-        //
+        $attribute->name = $request->get('name');
+
+        $attribute->save();
+
+        alert()->success('با تشکر', 'ویژگی مورد نظر شما آپدیت شد .');
+
+        return redirect()->route('admin.attributes.index');
     }
 
     /**
