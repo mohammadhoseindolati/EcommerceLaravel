@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\BrandController;
+use App\Http\Controllers\Admin\AttributeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,5 +20,6 @@ Route::get('/admin-panel/dashboard', function () {
 })->name('dashboard');
 
 Route::prefix('admin-panel/management')->name('admin.')->group(function (){
-    Route::resource('brands' , \App\Http\Controllers\Admin\BrandController::class) ;
+    Route::resource('brands' , BrandController::class) ;
+    Route::resource('attributes' , AttributeController::class) ;
 });

@@ -78,6 +78,18 @@
 
     <!-- Nav Item - Brands -->
 
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseProducts"
+           aria-expanded="true" aria-controls="collapseProducts">
+            <i class="fas fa-fw fa-cart-plus"></i>
+            <span> محصولات </span>
+        </a>
+        <div id="collapseProducts" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" href="{{ route('admin.attributes.index') }}">ویژگی</a>
+            </div>
+        </div>
+    </li>
 
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">
