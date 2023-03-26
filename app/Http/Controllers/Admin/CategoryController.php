@@ -27,12 +27,12 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        $parentCategories = Category::where('parent_id' , 0)->get();
+        $parentCategories = Category::where('parent_id', 0)->get();
         $attributes = Attribute::all();
 
-        return view('admin.categories.create' , [
+        return view('admin.categories.create', [
 
-            'parentCategories' => $parentCategories ,
+            'parentCategories' => $parentCategories,
             'attributes' => $attributes
         ]);
     }
@@ -45,7 +45,23 @@ class CategoryController extends Controller
      */
     public function store(CreateNewCategoryRequest $request)
     {
-        dd($request->all());
+        $category = Category::create([
+            'name' => $request->name,
+            'slug' => $request->slug,
+            'parent_id' => $request->parent_id,
+            'description' => $request->description,
+            'is_active' => $request->is_active,
+            'icon' => $request->icon,
+        ]);
+
+        foreach ($request->attribute_ids as $attributeId) {
+
+            $attribute =  Attribute::findOrFaild($attributeId);
+            $attribute->categories()->attach($category->id , [
+                'is_filter' => in_array($attributeId , $request->attribute_is_filter_ids) ? 1 : 0 ,
+                'is_variation' => $request->variation_id == $attributeId ? 1 : 0,
+            ]);
+        }
     }
 
     /**

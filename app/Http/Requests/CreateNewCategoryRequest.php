@@ -25,12 +25,11 @@ class CreateNewCategoryRequest extends FormRequest
     {
         return [
             "name" => 'required',
-            "slug" => 'required',
-            "attribute_ids" => array:3 [▶],
-            "attribute_is_filter_ids" => array:2 [▶] ,
-            "variation_id" => "1" ,
-            "icon" => null ,
-            "description" => null ,
+            "slug" => 'required|unique:categories,slug' ,
+            "parent_id" => 'required' ,
+            "attribute_ids" => 'required',
+            "attribute_is_filter_ids" => 'required' ,
+            "variation_id" => 'required' ,
         ];
     }
 }
