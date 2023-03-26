@@ -56,7 +56,7 @@ class CategoryController extends Controller
 
         foreach ($request->attribute_ids as $attributeId) {
 
-            $attribute =  Attribute::findOrFaild($attributeId);
+            $attribute =  Attribute::findOrFail($attributeId);
             $attribute->categories()->attach($category->id , [
                 'is_filter' => in_array($attributeId , $request->attribute_is_filter_ids) ? 1 : 0 ,
                 'is_variation' => $request->variation_id == $attributeId ? 1 : 0,
