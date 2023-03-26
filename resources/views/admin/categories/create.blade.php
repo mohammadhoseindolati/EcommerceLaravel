@@ -71,11 +71,11 @@
 
                     <div class="form-group col-md-3">
                         <label for="name">نام</label>
-                        <input type="text" class="form-control" name="name" id="name">
+                        <input type="text" class="form-control" name="name" id="name" value="{{ old('name') }}">
                     </div>
                     <div class="form-group col-md-3">
                         <label for="slug"> نام انگلیسی</label>
-                        <input type="text" class="form-control" name="slug" id="slug">
+                        <input type="text" class="form-control" name="slug" id="slug" value="{{ old('slug') }}">
                     </div>
 
                     <div class="form-group col-md-3">
@@ -127,7 +127,7 @@
 
                     <div class="form-group col-md-12">
                         <label for="description">توضیحات</label>
-                        <textarea  class="form-control" name="description" id="description"></textarea>
+                        <textarea  class="form-control" name="description" id="description">{{ old('description') }}</textarea>
                     </div>
 
                 </div>
