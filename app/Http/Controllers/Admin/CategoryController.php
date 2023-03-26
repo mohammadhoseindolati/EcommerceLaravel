@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CreateNewCategoryRequest;
 use App\Models\Attribute;
 use App\Models\Category;
 use Illuminate\Http\Request;
@@ -42,9 +43,9 @@ class CategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateNewCategoryRequest $request)
     {
-        dd($request->all()) ;
+        dd($request->all());
     }
 
     /**

@@ -80,7 +80,7 @@
 
                     <div class="form-group col-md-3">
                         <label for="parent_id">والد</label>
-                        <select class="form-control" name="" id="parent_id">
+                        <select class="form-control" name="parent_id" id="parent_id">
                             <option value="0" selected>بدون والد</option>
                             @foreach ($parentCategories as $category)
                                 <option value="{{ $category->id }}"> {{ $category->name }} </option>
