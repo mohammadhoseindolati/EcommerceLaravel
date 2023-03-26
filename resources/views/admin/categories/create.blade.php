@@ -4,6 +4,57 @@
     Create Category
 @endsection
 
+@section('script')
+    <script>
+        $('#attributVariationSelect').selectpicker({
+            'title': 'انتخاب متغییر'
+        });
+
+        $('#attributSelect').selectpicker({
+            'title': 'انتخاب ویژگی'
+        });
+
+        $('#attributSelect').on('changed.bs.select', function() {
+
+            let attributesSelected = $(this).val();
+            let attributes = @json($attributes);
+
+            let attributeForFilter = [];
+
+            attributes.map((attribute) => {
+                $.each(attributesSelected, function(i, element) {
+                    if (attribute.id == element) {
+                        attributeForFilter.push(attribute)
+                    }
+                })
+            });
+            $("#attributeIsFilterSelect").find('option').remove();
+            $("#attributVariationSelect").find('option').remove();
+            attributeForFilter.forEach((element) => {
+                let attributeForFilterOption = $("<option/>", {
+                    value: element.id,
+                    text: element.name
+                });
+
+                let attributeForVariationOption = $("<option/>", {
+                    value: element.id,
+                    text: element.name
+                });
+
+                $("#attributeIsFilterSelect").append(attributeForFilterOption);
+                $("#attributeIsFilterSelect").selectpicker('refresh');
+
+                $("#attributVariationSelect").append(attributeForVariationOption);
+                $("#attributVariationSelect").selectpicker('refresh');
+            });
+        });
+
+        $('#attributeIsFilterSelect').selectpicker({
+            'title': 'انتخاب فیلتر'
+        });
+    </script>
+@endsection
+
 @section('content')
     <!-- Content Row -->
     <div class="row">
@@ -43,6 +94,40 @@
                             <option value="1" selected>فعال</option>
                             <option value="0">غیر فعال</option>
                         </select>
+                    </div>
+
+                    <div class="form-group col-md-3">
+                        <label for="attributSelect">ویژگی</label>
+                        <select id="attributSelect" name="attribute_ids[]" class="form-control" multiple
+                            data-live-search="true">
+                            @foreach ($attributes as $attribute)
+                                <option value="{{ $attribute->id }}"> {{ $attribute->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="form-group col-md-3">
+                        <label for="attributeIsFilterSelect">انتخاب ویژگی های قابل فیلتر </label>
+                        <select id="attributeIsFilterSelect" name="attribute_is_filter_ids[]" class="form-control" multiple
+                            data-live-search="true">
+                        </select>
+                    </div>
+
+                    <div class="form-group col-md-3">
+                        <label for="attributVariationSelect">انتخاب ویژگی متغیر</label>
+                        <select id="attributVariationSelect" name="variation_id" class="form-control"
+                            data-live-search="true">
+                        </select>
+                    </div>
+
+                    <div class="form-group col-md-3">
+                        <label for="icon">آیکون</label>
+                        <input type="text" class="form-control" name="icon" id="icon">
+                    </div>
+
+                    <div class="form-group col-md-12">
+                        <label for="description">توضیحات</label>
+                        <textarea  class="form-control" name="description" id="description"></textarea>
                     </div>
 
                 </div>

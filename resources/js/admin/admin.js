@@ -2,6 +2,8 @@ window.$ = window.jQuery = require('jquery') ;
 require('bootstrap/dist/js/bootstrap.bundle') ;
 require('jquery.easing') ;
 require('chart.js');
+require('bootstrap-select');
+require('bootstrap-select/dist/js/i18n/defaults-fa_IR');
 (function($) {
     "use strict"; // Start of use strict
 

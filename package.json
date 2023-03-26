@@ -20,6 +20,7 @@
     },
     "dependencies": {
         "bootstrap": "^4.5.0",
+        "bootstrap-select": "^1.13.18",
         "chart.js": "^2.9.3",
         "jquery": "^3.5.1",
         "jquery.easing": "^1.4.1"

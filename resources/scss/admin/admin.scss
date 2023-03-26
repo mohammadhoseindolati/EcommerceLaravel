@@ -4,6 +4,7 @@
 
 // Import Bootstrap
 @import "~bootstrap/scss/bootstrap.scss";
+@import "~bootstrap-select/sass/bootstrap-select.scss";
 
 // Import Custom SB Admin 2 Mixins and Components
 @import "mixins.scss";
@@ -44,4 +45,56 @@ body {
 
 #registerCheckBox::after{
     right: -1.5rem;
+}
+
+// Bootstrap Paginate RTL
+.page-item:first-child .page-link {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+
+    border-top-right-radius: 0.35rem;
+    border-bottom-right-radius: 0.35rem;
+}
+
+.page-item:last-child .page-link {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+
+    border-top-left-radius: 0.35rem;
+    border-bottom-left-radius: 0.35rem;
+}
+
+// Bootstrap Select RTL & Customize
+.filter-option-inner-inner {
+    text-align: right;
+}
+
+.bootstrap-select > button {
+    color: #6e707e;
+    background-color: #fff;
+    border-color: #d1d3e2;
+}
+
+.bootstrap-select > button:not(:disabled):not(.disabled):active,
+.bootstrap-select > button:not(:disabled):not(.disabled).active,
+.show > .btn-light.dropdown-toggle {
+    color: #6e707e;
+    background-color: #fff;
+    border-color: #d1d3e2;
+}
+
+.bootstrap-select > button:focus,
+.bootstrap-select > button.focus {
+    color: #6e707e;
+    background-color: #fff;
+    border-color: #d1d3e2;
+    box-shadow: 0 0 0 0.2rem rgba(78, 115, 223, 0.25);
+}
+
+.bootstrap-select .dropdown-menu li {
+    text-align: right;
+}
+
+.bootstrap-select.show-tick .dropdown-menu li a span.text{
+    margin-right: 10px;
 }
