@@ -11,10 +11,10 @@
 
         <div class="col-xl-12 col-md-12 mb-4 p-md-5 bg-white">
             <div class="mb-4 d-flex justify-content-between">
-                <h5 class="font-weight-bold"> لیست برند ها ({{ $brands->total() }}) </h5>
-                <a class="btn btn-sm btn-outline-primary" href="{{ route('admin.brands.create') }}">
+                <h5 class="font-weight-bold"> لیست دسته بندی ها ({{ $categories->total() }}) </h5>
+                <a class="btn btn-sm btn-outline-primary" href="{{ route('admin.categories.create') }}">
                     <i class="fa fa-plus"></i>
-                    ایجاد برند
+                    ایجاد دسته بندی
                 </a>
             </div>
             <div class="">
@@ -23,23 +23,33 @@
                             <tr>
                                 <td>#</td>
                                 <td>نام</td>
+                                <td>نام انگلیسی</td>
+                                <td>والد</td>
                                 <td>وضعیت</td>
                                 <td>عملیات</td>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($brands as $key => $brand)
+                            @foreach($categories as $key => $category)
                                 <tr>
-                                    <td>{{ $brands->firstItem() + $key }}</td>
-                                    <td>{{ $brand->name }}</td>
+                                    <td>{{ $categories->firstItem() + $key }}</td>
+                                    <td>{{ $category->name }}</td>
+                                    <td>{{ $category->slug }}</td>
                                     <td>
-                                        <span class="{{ $brand->getRawOriginal('is_active') ? 'text-success' : 'text-danger' }}">
-                                            {{ $brand->is_active }}
+                                        @if($category->parent_id == 0 )
+                                            {{ $category->name }}
+                                        @else
+                                            {{ $category->parent->name }}
+                                        @endif
+                                    </td>
+                                    <td>
+                                        <span class="{{ $category->getRawOriginal('is_active') ? 'text-success' : 'text-danger' }}">
+                                            {{ $category->is_active }}
                                         </span>
                                     </td>
                                     <td>
-                                        <a class="btn btn-sm btn-success" href="{{ route('admin.brands.show' , ['brand' => $brand->id ]) }}">نمایش</a>
-                                        <a class="btn btn-sm btn-info" href="{{ route('admin.brands.edit' , ['brand' => $brand->id ]) }}">ویرایش</a>
+                                        <a class="btn btn-sm btn-success" href="{{ route('admin.categories.show' , ['category' => $category->id ]) }}">نمایش</a>
+                                        <a class="btn btn-sm btn-info" href="{{ route('admin.categories.edit' , ['category' => $category->id ]) }}">ویرایش</a>
                                     </td>
                                 </tr>
                             @endforeach

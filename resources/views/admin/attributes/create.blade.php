@@ -20,7 +20,7 @@
 
                     <div class="form-group col-md-3">
                         <label for="name">نام</label>
-                        <input type="text" class="form-control" name="name" id="name">
+                        <input type="text" class="form-control" name="name" id="name" value="{{ old('name') }}">
                     </div>
 
                 </div>

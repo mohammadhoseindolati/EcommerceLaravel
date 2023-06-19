@@ -18,7 +18,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        $categories = Category::latest()->paginate(20);
+        return view('admin.categories.index' , ['categories' => $categories ]);
     }
 
     /**
@@ -87,9 +88,9 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Category $category)
     {
-        //
+        return view('admin.categories.show' , ['category' => $category]) ;
     }
 
     /**
