@@ -25,4 +25,5 @@ Route::prefix('admin-panel/management')->name('admin.')->group(function (){
     Route::resource('brands' , BrandController::class) ;
     Route::resource('attributes' , AttributeController::class) ;
     Route::resource('categories' , CategoryController::class) ;
+    Route::resource('tags' , \App\Http\Controllers\Admin\TagController::class) ;
 });

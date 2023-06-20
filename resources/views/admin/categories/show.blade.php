@@ -53,6 +53,37 @@
                             <textarea type="text" class="form-control" disabled>{{ $category->description }}</textarea>
                         </div>
 
+                        <div class="col-md-12">
+                            <hr>
+
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label for="name">ویژگی</label>
+                                    <div class="form-control div-disable" >
+                                        @foreach($category->attributes as $attribute)
+                                            {{ $attribute->name }} {{ $loop->last ? '' : ',' }}
+                                        @endforeach
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="name">ویژگی های قابل فیلتر</label>
+                                    <div class="form-control div-disable" >
+                                        @foreach($category->attributes()->wherePivot('is_filter', 1)->get() as $attribute)
+                                            {{ $attribute->name }} {{ $loop->last ? '' : ',' }}
+                                        @endforeach
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="name">متغییر</label>
+                                    <div class="form-control div-disable" >
+                                        @foreach($category->attributes()->wherePivot('is_variation', 1)->get() as $attribute)
+                                            {{ $attribute->name }} {{ $loop->last ? '' : ',' }}
+                                        @endforeach
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
 
                     <a href="{{ route('admin.categories.index') }}" class="btn btn-dark mt-5">بازگشت</a>

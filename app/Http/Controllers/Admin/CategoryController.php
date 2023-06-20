@@ -99,9 +99,11 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Category $category)
     {
-        //
+        $parentCategories = Category::where('parent_id', 0)->get();
+        $attributes = Attribute::all();
+        return view('admin.categories.edit' , ['category' => $category , 'parentCategories' => $parentCategories , 'attributes' => $attributes]) ;
     }
 
     /**
@@ -111,9 +113,50 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Category $category)
     {
-        //
+        $request->validate([
+            "name" => 'required',
+            "slug" => 'required|unique:categories,slug,'.$category->id ,
+            "parent_id" => 'required' ,
+            "attribute_ids" => 'required',
+            "attribute_is_filter_ids" => 'required' ,
+            "variation_id" => 'required' ,
+        ]) ;
+        try {
+            DB::beginTransaction();
+            $category->update([
+                'name' => $request->name,
+                'slug' => $request->slug,
+                'parent_id' => $request->parent_id,
+                'description' => $request->description,
+                'is_active' => $request->is_active,
+                'icon' => $request->icon,
+            ]);
+
+            $category->attributes()->detach();
+
+            foreach ($request->attribute_ids as $attributeId) {
+
+                $attribute =  Attribute::findOrFail($attributeId);
+                $attribute->categories()->attach($category->id, [
+                    'is_filter' => in_array($attributeId, $request->attribute_is_filter_ids) ? 1 : 0,
+                    'is_variation' => $request->variation_id == $attributeId ? 1 : 0,
+                ]);
+            }
+
+            DB::commit();
+        } catch (\Exception $ex) {
+
+            DB::rollBack();
+
+            alert()->error('مشکل در ویرایش دسته بندی', $ex->getMessage())->persistent('حله');
+
+            return redirect()->back();
+        }
+        alert()->success('با تشکر', 'دسته بندی مورد نظر شما ویرایش شد .');
+
+        return redirect()->route('admin.categories.index');
     }
 
     /**

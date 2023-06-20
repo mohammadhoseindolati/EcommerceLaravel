@@ -37,7 +37,7 @@
                                     <td>{{ $category->slug }}</td>
                                     <td>
                                         @if($category->parent_id == 0 )
-                                            {{ $category->name }}
+                                            {{ "بدون والد" }}
                                         @else
                                             {{ $category->parent->name }}
                                         @endif
