@@ -64,9 +64,9 @@ class TagController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Tag $tag)
     {
-        //
+        return view('admin.tags.edit', ['tag' => $tag]);
     }
 
     /**
@@ -76,9 +76,15 @@ class TagController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CreateTagRequest $request, Tag $tag)
     {
-        //
+        $tag->update([
+            'name' => $request->name ,
+        ]);
+
+        alert()->success('با تشکر', 'ویژگی مورد نظر شما آپدیت شد .');
+
+        return redirect()->route('admin.tags.index');
     }
 
     /**
