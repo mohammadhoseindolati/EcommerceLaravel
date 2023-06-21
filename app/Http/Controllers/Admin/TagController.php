@@ -16,7 +16,8 @@ class TagController extends Controller
      */
     public function index()
     {
-        //
+        $tags = Tag::latest()->paginate(20);
+        return view('admin.tags.index', ['tags' => $tags]);
     }
 
     /**
@@ -52,9 +53,9 @@ class TagController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Tag $tag)
     {
-        //
+        return view('admin.tags.show', ['tag' => $tag]);
     }
 
     /**

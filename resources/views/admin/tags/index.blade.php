@@ -10,10 +10,10 @@
 
         <div class="col-xl-12 col-md-12 mb-4 p-md-5 bg-white">
             <div class="mb-4 d-flex justify-content-between">
-                <h5 class="font-weight-bold"> لیست ویژگی ها ({{ $attributes->total() }}) </h5>
+                <h5 class="font-weight-bold"> لیست تگ ها ({{ $tags->total() }}) </h5>
                 <a class="btn btn-sm btn-outline-primary" href="{{ route('admin.attributes.create') }}">
                     <i class="fa fa-plus"></i>
-                    ایجاد ویژگی
+                    ایجاد تگ
                 </a>
             </div>
             <div class="">
@@ -26,15 +26,15 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($attributes as $key => $attribute)
+                        @foreach ($tags as $key => $tag)
                             <tr>
-                                <td>{{ $attributes->firstItem() + $key }}</td>
-                                <td>{{ $attribute->name }}</td>
+                                <td>{{ $tags->firstItem() + $key }}</td>
+                                <td>{{ $tag->name }}</td>
                                 <td>
                                     <a class="btn btn-sm btn-success"
-                                        href="{{ route('admin.attributes.show', ['attribute' => $attribute->id]) }}">نمایش</a>
+                                        href="{{ route('admin.tags.show', ['tag' => $tag->id]) }}">نمایش</a>
                                     <a class="btn btn-sm btn-info"
-                                        href="{{ route('admin.attributes.edit', ['attribute' => $attribute->id]) }}">ویرایش</a>
+                                        href="{{ route('admin.tags.edit', ['tag' => $tag->id]) }}">ویرایش</a>
                                 </td>
                             </tr>
                         @endforeach

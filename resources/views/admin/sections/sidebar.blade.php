@@ -86,7 +86,9 @@
         </a>
         <div id="collapseProducts" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="{{ route('admin.attributes.index') }}">ویژگی</a>
+                <a class="collapse-item" href="{{ route('admin.attributes.index') }}">ویژگی ها</a>
+                <a class="collapse-item" href="{{ route('admin.categories.index') }}">دسته بندی ها</a>
+                <a class="collapse-item" href="{{ route('admin.tags.index') }}">تگ ها </a>
             </div>
         </div>
     </li>
