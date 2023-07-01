@@ -13,6 +13,19 @@
         $('#brand_id').selectpicker({
             'title': 'انتخاب برند'
         });
+        $('#primary_image').change(function (){
+
+            var filename = $(this).val() ;
+
+            $(this).next('.custom-file-label').html(filename) ;
+        });
+        $('#images').change(function (){
+
+            var filename = $(this).val() ;
+
+            $(this).next('.custom-file-label').html(filename) ;
+        });
+
 
     </script>
 @endsection
@@ -27,7 +40,7 @@
             </div>
             <hr>
             @include('admin.sections.errors')
-            <form action="{{ route('admin.products.store') }}" method="post">
+            <form action="{{ route('admin.products.store') }}" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="form-row">
 
@@ -64,6 +77,32 @@
                         <label for="description">توضیحات</label>
                         <textarea  class="form-control" name="description" id="description">{{ old('description') }}</textarea>
                     </div>
+
+{{--                    Product Image Section--}}
+
+                    <div class="col-md-12">
+                        <hr>
+                        <p> تصاویر محصول </p>
+                    </div>
+
+                    <div class="form-group col-md-3">
+
+                        <label for="product_image">انتخاب تصویر اصلی</label>
+                        <div class="custom-file">
+                            <input type="file" name="primary_image" class="custom-file-input" id="primary_image">
+                            <label class="custom-file-label" for="primary_image">انتخاب فایل</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-3">
+
+                        <label for="product_image">انتخاب تصاویر</label>
+                        <div class="custom-file">
+                            <input type="file" name="images[]" id="images" multiple class="custom-file-input" id="primary_image">
+                            <label class="custom-file-label" for="images">انتخاب فایل ها</label>
+                        </div>
+                    </div>
+
                 </div>
                 <button class="btn btn-outline-primary mt-5" type="submit">ثبت </button>
                 <a href="{{ route('admin.products.index') }}" class="btn btn-dark mt-5 mr-3">بازگشت</a>
