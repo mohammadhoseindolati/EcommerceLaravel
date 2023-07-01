@@ -11,7 +11,7 @@
         <div class="col-xl-12 col-md-12 mb-4 p-md-5 bg-white">
             <div class="mb-4 d-flex justify-content-between">
                 <h5 class="font-weight-bold"> لیست تگ ها ({{ $tags->total() }}) </h5>
-                <a class="btn btn-sm btn-outline-primary" href="{{ route('admin.tags.create') }}">
+                <a class="btn btn-sm btn-outline-primary" href="{{ route('admin.attributes.create') }}">
                     <i class="fa fa-plus"></i>
                     ایجاد تگ
                 </a>
