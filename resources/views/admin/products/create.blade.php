@@ -25,7 +25,13 @@
 
             $(this).next('.custom-file-label').html(filename) ;
         });
-
+        $('#CategorySelect').selectpicker({
+            'title': 'انتخاب دسته بندی '
+        });
+        $('#CategorySelect').on('changed.bs.select', function() {
+            let attributesSelected = $(this).val();
+            console.log(attributesSelected);
+        }) ;
 
     </script>
 @endsection
@@ -101,6 +107,22 @@
                             <input type="file" name="images[]" id="images" multiple class="custom-file-input" id="primary_image">
                             <label class="custom-file-label" for="images">انتخاب فایل ها</label>
                         </div>
+                    </div>
+
+                    {{--                    Product Category&Attribute Section--}}
+                    <div class="col-md-12">
+                        <hr>
+                        <p> دسته بندی و ویژگی محصول : </p>
+                    </div>
+
+                    <div class="form-group col-md-3 ">
+                        <label for="CategorySelect">دسته بندی</label>
+                        <select id="CategorySelect" name="category_id" class="form-control"
+                                data-live-search="true">
+                            @foreach ($categories as $category)
+                                <option value="{{ $category->id }}"> {{ $category->name }} - {{ $category->parent->name }}</option>
+                            @endforeach
+                        </select>
                     </div>
 
                 </div>
