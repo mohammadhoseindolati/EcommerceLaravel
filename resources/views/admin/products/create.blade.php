@@ -6,33 +6,59 @@
 
 @section('script')
     <script>
-
         $('#tagSelect').selectpicker({
             'title': 'انتخاب تگ'
         });
         $('#brand_id').selectpicker({
             'title': 'انتخاب برند'
         });
-        $('#primary_image').change(function (){
+        $('#primary_image').change(function() {
 
-            var filename = $(this).val() ;
+            var filename = $(this).val();
 
-            $(this).next('.custom-file-label').html(filename) ;
+            $(this).next('.custom-file-label').html(filename);
         });
-        $('#images').change(function (){
+        $('#images').change(function() {
 
-            var filename = $(this).val() ;
+            var filename = $(this).val();
 
-            $(this).next('.custom-file-label').html(filename) ;
+            $(this).next('.custom-file-label').html(filename);
         });
         $('#CategorySelect').selectpicker({
             'title': 'انتخاب دسته بندی '
         });
-        $('#CategorySelect').on('changed.bs.select', function() {
-            let attributesSelected = $(this).val();
-            console.log(attributesSelected);
-        }) ;
+        $('#CategorySelect').change(function() {
 
+            let attributesSelected = $(this).val();
+
+            $.get(`{{ url('/admin-panel/management/category-attribute/${attributesSelected}') }}`, function(data,
+                status) {
+                if (status == "success") {
+
+                    $('#category-attribute').find('div').remove();
+
+                    data.attributes.forEach((attribute) => {
+                        console.log(attribute)
+                        let attributeFormGroup = $('<div />' , {
+                            class : 'form-group col-md-3' ,
+                        }) ;
+                        attributeFormGroup.append($('<label />' , {
+                            for : attribute.name ,
+                            text : attribute.name ,
+                        }))
+
+                        attributeFormGroup.append($('<input />' , {
+                            type : 'text' ,
+                            name : `attribute_ids[${attribute.id}]` ,
+                            class : 'form-control' ,
+                            id : attribute.name ,
+                        }));
+
+                        $('#category-attribute').append(attributeFormGroup) ;
+                    })
+                }
+            });
+        })
     </script>
 @endsection
 
@@ -52,12 +78,12 @@
 
                     <div class="form-group col-md-3">
                         <label for="name">نام</label>
-                        <input type="text" class="form-control" name="name" id="name" value="{{ old('name') }}">
+                        <input type="text" class="form-control" name="name" id="name"
+                            value="{{ old('name') }}">
                     </div>
                     <div class="form-group col-md-3">
                         <label for="brand_id">برند</label>
-                        <select id="brand_id" name="brand_id" class="form-control"
-                                data-live-search="true">
+                        <select id="brand_id" name="brand_id" class="form-control" data-live-search="true">
                             @foreach ($brands as $brand)
                                 <option value="{{ $brand->id }}"> {{ $brand->name }}</option>
                             @endforeach
@@ -72,8 +98,7 @@
                     </div>
                     <div class="form-group col-md-3">
                         <label for="tagSelect">تگ</label>
-                        <select id="tagSelect" name="tag_ids[]" class="form-control" multiple
-                                data-live-search="true">
+                        <select id="tagSelect" name="tag_ids[]" class="form-control" multiple data-live-search="true">
                             @foreach ($tags as $tag)
                                 <option value="{{ $tag->id }}"> {{ $tag->name }}</option>
                             @endforeach
@@ -81,10 +106,10 @@
                     </div>
                     <div class="form-group col-md-12">
                         <label for="description">توضیحات</label>
-                        <textarea  class="form-control" name="description" id="description">{{ old('description') }}</textarea>
+                        <textarea class="form-control" name="description" id="description">{{ old('description') }}</textarea>
                     </div>
 
-{{--                    Product Image Section--}}
+                    {{--                    Product Image Section --}}
 
                     <div class="col-md-12">
                         <hr>
@@ -104,12 +129,13 @@
 
                         <label for="product_image">انتخاب تصاویر</label>
                         <div class="custom-file">
-                            <input type="file" name="images[]" id="images" multiple class="custom-file-input" id="primary_image">
+                            <input type="file" name="images[]" id="images" multiple class="custom-file-input"
+                                id="primary_image">
                             <label class="custom-file-label" for="images">انتخاب فایل ها</label>
                         </div>
                     </div>
 
-                    {{--                    Product Category&Attribute Section--}}
+                    {{--                    Product Category&Attribute Section --}}
                     <div class="col-md-12">
                         <hr>
                         <p> دسته بندی و ویژگی محصول : </p>
@@ -117,12 +143,19 @@
 
                     <div class="form-group col-md-3 ">
                         <label for="CategorySelect">دسته بندی</label>
-                        <select id="CategorySelect" name="category_id" class="form-control"
-                                data-live-search="true">
+                        <select id="CategorySelect" name="category_id" class="form-control" data-live-search="true">
+                            </option>
                             @foreach ($categories as $category)
-                                <option value="{{ $category->id }}"> {{ $category->name }} - {{ $category->parent->name }}</option>
+                                <option value="{{ $category->id }}"> {{ $category->name }} - {{ $category->parent->name }}
+                                </option>
                             @endforeach
                         </select>
+                    </div>
+
+                    <div class="form-group col-md-12" >
+                        <div class="row" id="category-attribute">
+
+                        </div>
                     </div>
 
                 </div>
