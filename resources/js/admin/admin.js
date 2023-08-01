@@ -4,6 +4,7 @@ require('jquery.easing') ;
 require('chart.js');
 require('bootstrap-select');
 require('bootstrap-select/dist/js/i18n/defaults-fa_IR');
+require('./files/jquery.czMore-latest');
 (function($) {
     "use strict"; // Start of use strict
 

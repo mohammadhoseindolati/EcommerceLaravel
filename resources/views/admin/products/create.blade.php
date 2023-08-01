@@ -27,6 +27,7 @@
         $('#CategorySelect').selectpicker({
             'title': 'انتخاب دسته بندی '
         });
+        $('#attributeContainer').hide();
         $('#CategorySelect').change(function() {
 
             let attributesSelected = $(this).val();
@@ -34,6 +35,8 @@
             $.get(`{{ url('/admin-panel/management/category-attribute/${attributesSelected}') }}`, function(data,
                 status) {
                 if (status == "success") {
+
+                    $('#attributeContainer').fadeIn();
 
                     $('#category-attribute').find('div').remove();
 
@@ -56,9 +59,12 @@
 
                         $('#category-attribute').append(attributeFormGroup) ;
                     })
+
+                    $('#variation-name').text(data.variation.name);
                 }
             });
         })
+        $("#czContainer").czMore();
     </script>
 @endsection
 
@@ -152,9 +158,53 @@
                         </select>
                     </div>
 
-                    <div class="form-group col-md-12" >
+                    <div id=attributeContainer class="form-group col-md-12" >
                         <div class="row" id="category-attribute">
+                        </div>
+                        <div class="col-md-12">
+                            <hr>
+                            <p>وارد کردن مقدار برای متغییر <span id="variation-name"></span></p>
+                        </div>
+                        <div id="czContainer">
+                            <div id="first">
+                                <div class="recordset">
+                                <div class="row">
+                                    <div class="form-group col-md-3">
+                                        <label>مقدار </label>
+                                        <input type="text" class="form-control" name="variation_value[value][]" >
+                                    </div>
+                                    <div class="form-group col-md-3">
+                                        <label>قیمت </label>
+                                        <input type="text" class="form-control" name="variation_value[price][]">
+                                    </div>
+                                    <div class="form-group col-md-3">
+                                        <label>تعداد </label>
+                                        <input type="text" class="form-control" name="variation_value[quantity][]">
+                                    </div>
+                                    <div class="form-group col-md-3">
+                                        <label>sku</label>
+                                        <input type="text" class="form-control" name="variation_value[sku][]">
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
+
+                    {{--   Delivery Amount Section --}}
+                    <div class="col-md-12">
+                        <hr>
+                        <p> هزینه ارسال : </p>
+                    </div>
+
+                    <div class="form-group col-md-3 ">
+                            <label for="deliveryAmount">هزینه ارسال</label>
+                            <input type="text" id="deliveryAmount" class="form-control" name="deliveryAmount">
+                    </div>
+                    <div class="form-group col-md-3 ">
+                            <label for="">هزینه ارسال به ازای محصول اضافی</label>
+                            <input type="text" id="deliveryAmountPerAdditional" class="form-control" name="deliveryAmountPerAdditional">
                         </div>
                     </div>
 
